@@ -9,10 +9,15 @@ std::vector<std::string> split(std::string str, const std::string& delimiter);
 
 std::string join(const std::vector<std::string>& parts, const std::string& delimiter);
 
-std::set<std::string> shingle(const std::string& s, int shingleWidth = 4);
+template<typename T>
+std::set<T> shingle(const T& s, int shingleWidth = 4);
 
-std::set<std::string> intersectionOf(const std::set<std::string>& setA, const std::set<std::string>& setB);
+template<typename T>
+std::set<T> intersectionOf(const std::set<T>& setA, const std::set<T>& setB);
 
-std::set<std::string> unionOf(const std::set<std::string>& setA, const std::set<std::string>& setB);
+template<typename T>
+std::set<T> unionOf(const std::set<T>& setA, const std::set<T>& setB);
+
+#include "utils.ipp"
 
 #endif
