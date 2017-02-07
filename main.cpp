@@ -31,26 +31,11 @@ std::string containsBannedWords(const std::string& input, const std::vector<std:
  */
 double similarity(const std::string& a, const std::string& b)
 {
-	std::vector<std::string> vec = split(a, " ");
-	std::set<std::string> setA;
-	setA.insert(vec.begin(), vec.end());
+	std::set<std::string> setA = shingle(a, 1);
+	std::set<std::string> setB = shingle(b, 1);
 
-	vec = split(b, " ");
-	std::set<std::string> setB;
-	setB.insert(vec.begin(), vec.end());
-
-	std::set<std::string> intersection;
-	std::set<std::string> unionSet;
-
-	for (const std::string& wordA : setA)
-	{
-		if (setB.count(wordA)) // 0 is false, non-0 is true
-		{
-			intersection.insert(wordA);
-		}
-	}
-	unionSet = setA;
-	unionSet.insert(setB.begin(), setB.end());
+	std::set<std::string> intersection = intersectionOf(setA, setB);
+	std::set<std::string> unionSet = unionOf(setA, setB);
 
 	double top = intersection.size();
 	double bottom = unionSet.size();
@@ -64,38 +49,11 @@ double similarity(const std::string& a, const std::string& b)
  */
 double shingling(const std::string& a, const std::string& b)
 {
-	auto shingler = [](const std::string& s, int shingleWidth = 4) -> std::set<std::string>
-	{
-		std::vector<std::string> vec = split(s, " ");
-		std::set<std::string> ret;
+	std::set<std::string> setA = shingle(a);
+	std::set<std::string> setB = shingle(b);
 
-		std::vector<std::string>::iterator iter = vec.begin();
-		std::vector<std::string>::iterator iter2 = iter + shingleWidth;
-		std::vector<std::string>::iterator end = vec.end();
-		for(; iter2 != end; iter++, iter2++)
-		{
-			std::vector<std::string> intermediate;
-			intermediate.insert(intermediate.begin(), iter, iter2);
-			ret.insert(join(intermediate, " "));
-		}
-
-		return ret;
-	};
-	std::set<std::string> setA = shingler(a);
-	std::set<std::string> setB = shingler(b);
-
-	std::set<std::string> intersection;
-	std::set<std::string> unionSet;
-
-	for (const std::string& wordA : setA)
-	{
-		if (setB.count(wordA)) // 0 is false, non-0 is true
-		{
-			intersection.insert(wordA);
-		}
-	}
-	unionSet = setA;
-	unionSet.insert(setB.begin(), setB.end());
+	std::set<std::string> intersection = intersectionOf(setA, setB);
+	std::set<std::string> unionSet = unionOf(setA, setB);
 
 	double top = intersection.size();
 	double bottom = unionSet.size();
