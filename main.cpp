@@ -7,6 +7,14 @@
 #include <iostream>
 using namespace std;
 
+/**
+ * Naive approach - substring matching is a bad idea since it doesn't guarantee
+ * that they were meaning to be vulgar.
+ *
+ * "I am late on my assignment."
+ *                  ---          
+ * Contains a curse word, but it isn't a cursing/ bad sentence.
+ */
 std::string containsBannedWords(const std::string& input, const std::vector<std::string>& bannedSet)
 {
 	for (const std::string& bannedWord : bannedSet)
