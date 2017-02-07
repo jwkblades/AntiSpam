@@ -25,6 +25,10 @@ std::string containsBannedWords(const std::string& input, const std::vector<std:
 	return "";
 }
 
+/**
+ * The problem here is obviously that we can potentially get a very similar
+ * string out of things that are very different in practice.
+ */
 double similarity(const std::string& a, const std::string& b)
 {
 	std::vector<std::string> vec = split(a, " ");
