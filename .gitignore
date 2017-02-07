@@ -1,0 +1,5 @@
+AntiSpam
+*.o
+*.d
+*.*.sw*
+build/
