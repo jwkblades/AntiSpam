@@ -7,31 +7,24 @@
 #include <iostream>
 using namespace std;
 
-bool containsBannedWords(const std::string& input, const std::vector<std::string>& bannedSet)
+std::string containsBannedWords(const std::string& input, const std::vector<std::string>& bannedSet)
 {
 	for (const std::string& bannedWord : bannedSet)
 	{
 		if (input.find(bannedWord) != std::string::npos)
 		{
-			return true;
+			return bannedWord;
 		}
 	}
-	return false;
+	return "";
 }
 
 int main(void)
 {
-	std::string in = "What the fudge.";
-	std::vector<std::string> bannedWords = {"fudge"};
+	std::string in = "Pancakes and waffles.";
+	std::vector<std::string> bannedWords = {"fudge", "cake"};
 
-	if (containsBannedWords(in, bannedWords))
-	{
-		cout << "The sentence '" << in << "' contains a banned word." << endl;
-	}
-	else
-	{
-		cout << "The sentence '" << in << "' is clean!" << endl;
-	}
+	cout << "The sentence '" << in << "' contains banned word: '" << containsBannedWords(in, bannedWords) << "'" << endl;
 
 	return 0;
 }
